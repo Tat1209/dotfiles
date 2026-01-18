@@ -2,7 +2,6 @@
 vim.opt.swapfile = false            -- スワップファイルを作成しない
 vim.opt.hidden = true               -- バッファが編集中でも他のファイルを開ける
 vim.opt.autoread = true             -- ファイルが外部で変更されたら自動で読み直す
-vim.opt.clipboard = 'unnamedplus'   -- OSのクリップボードと共有（これは便利なので残すことを推奨）
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~' -- 行の折り返しや移動を許可するキーを設定
 vim.opt.backspace = 'indent,eol,start' -- バックスペースの挙動を設定
 
@@ -26,8 +25,13 @@ vim.opt.smartcase = true
 vim.opt.showmatch = true            -- 対応する括弧のハイライト
 
 if vim.g.vscode then
-
+    -- VSCodeNeovim環境用設定
+    vim.opt.foldenable = false
+    vim.opt.foldopen:remove({"jump", "search", "mark"})
+    
 else
+    -- 通常のNeovim環境用設定
+    vim.opt.clipboard = 'unnamedplus'   -- OSのクリップボードと共有
     vim.opt.mouse = 'a'                 -- VSCodeがマウスを処理するため不要
     vim.opt.backup = false              -- Neovimのデフォルトで不要
     vim.opt.number = true               -- VSCodeの機能で表示するため不要
