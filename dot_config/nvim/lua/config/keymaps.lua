@@ -1,14 +1,18 @@
+-- 変数定義
+local vscode = require('vscode')
+
 -- Esc連打でハイライト解除
 vim.keymap.set({'n'}, '<Esc><Esc>', '<cmd>nohlsearch<cr>', { desc = 'Clear search highlight', silent = true })
 
 -- カーソル移動
 if vim.g.vscode then
     -- folding が展開されないように，VSCode の行移動を優先 J,K で{'v'}はうまくいかんかった
-    -- CursorMoveでは展開されるため力業
-    vim.keymap.set({'n'}, 'j', "<Cmd>call VSCodeCall('cursorDown')<CR>", opts)
-    vim.keymap.set({'n'}, 'k', "<Cmd>call VSCodeCall('cursorUp')<CR>", opts)
-    vim.keymap.set({'n'}, 'J', "<Cmd>call VSCodeCall('cursorDown')<CR><Cmd>call VSCodeCall('cursorDown')<CR><Cmd>call VSCodeCall('cursorDown')<CR>", opts)
-    vim.keymap.set({'n'}, 'K', "<Cmd>call VSCodeCall('cursorUp')<CR><Cmd>call VSCodeCall('cursorUp')<CR><Cmd>call VSCodeCall('cursorUp')<CR>", opts)
+    -- cursorMoveでは展開されるため力業
+    vim.keymap.set({'n'}, 'j', function() vscode.action('cursorDown') end, opts)
+    vim.keymap.set({'n'}, 'k', function() vscode.action('cursorUp') end, opts)
+    vim.keymap.set({'n'}, 'J', function() vscode.action('cursorDown') vscode.action('cursorDown') vscode.action('cursorDown') end, opts)
+    vim.keymap.set({'n'}, 'K', function() vscode.action('cursorUp') vscode.action('cursorUp') vscode.action('cursorUp') end, opts)
+
     vim.keymap.set({'v'}, 'J', '3gj')
     vim.keymap.set({'v'}, 'K', '3gk')
 else
@@ -65,9 +69,13 @@ vim.keymap.set({'n'}, 'm', '<C-o>')
 vim.keymap.set({'n'}, 'M', '<C-i>')
 
 if vim.g.vscode then
-    -- VSCode Neovimによるコメントアウトのトグル機能を無効化 やっぱ必要っぽい 2026-03-08
-    vim.keymap.del({'x', 'n'}, 'gc')
     vim.keymap.del({'n'}, 'gcc')
+    vim.keymap.set({'n'}, 'gc', function() vscode.action('editor.action.commentLine') end)
+    vim.keymap.set({'x'}, 'gc', require('utils.vscode').comment_visual)
+else
+    vim.keymap.del({'n'}, 'gcc') -- タイムアウトまで待ってから gcc を呼び出すのは遅いので，gcc は削除して gc のみで完結させる
+    vim.keymap.set({'n'}, 'gc', function() return require('vim._comment').operator() .. '_' end, { expr = true, desc = 'Toggle comment line' }) -- gc を gcc にマッピングでは無理
+    vim.keymap.set({'n'}, 'gC', function() return require('vim._comment').operator() end, { expr = true, desc = 'Toggle comment operator' }) -- gC はオペレーターとして機能させる (従来の gc の挙動)
 end
 
 -- jk で挿入モードを抜ける
@@ -86,5 +94,5 @@ end
 -- ここからは，VSCodeの拡張機能側で，ctrlキーを適用する必要あり
 -- 行統合
 vim.keymap.set({'n'}, '<C-j>', 'J')
-vim.keymap.set({'n'}, '<C-J>', 'gJ')
+-- vim.keymap.set({'n'}, '<C-J>', 'gJ') -- これ追加すると J の挙動がバグる S-j とかにしたら治る？
 vim.keymap.set({'n'}, '<C-k>', 'k"xdd"xpkJ')

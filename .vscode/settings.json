@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.toml.tmpl": "toml",
+        "dot_*.toml": "toml",
+        "*.json.tmpl": "json",
+        "*.yaml.tmpl": "yaml",
+        "*.yml.tmpl": "yaml",
+        "dot_gitignore": "ignore",
+        "dot_gitconfig": "ini"
+    }
+}

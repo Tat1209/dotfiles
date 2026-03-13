@@ -2,5 +2,6 @@
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "mini.ai": { "branch": "main", "commit": "e139eb1101beb0250fea322f8c07a42f0f175688" },
   "mini.comment": { "branch": "main", "commit": "51c173dffa17dc14c81169deaeea430bd394ab51" },
-  "nvim-spider": { "branch": "main", "commit": "4bca4dbc53f01b37385146b37ab5ce55bdc083fc" }
+  "nvim-spider": { "branch": "main", "commit": "4bca4dbc53f01b37385146b37ab5ce55bdc083fc" },
+  "nvim-various-textobjs": { "branch": "main", "commit": "34ca4f6b54cf167554c5792cacc69c930b654136" }
 }

@@ -23,6 +23,6 @@ def process_data():
 
 if __name__ == "__main__":
     analyzer = ModelAnalyzer("ResNet18_Optimizer")
-    val = analyzer.calculate_loss(1.5E+10, "FastAPI")
+    val = analyzer.calculate_loss(1.5e+99, "FastAPI")
     print(val)
 
