@@ -1,4 +1,5 @@
 .vscode/
+run_onchange_setup.ps1
 
 # Windows「ではない」場合、Windows専用のファイル・ディレクトリを除外する
 {{ if ne .chezmoi.os "windows" }}
