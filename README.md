@@ -16,7 +16,14 @@
 3. **chezmoiの初期化と適用**
    対象リポジトリを指定して初期化し、設定を適用します。
    ```powershell
-   chezmoi init Tat1209/dotfiles
+   chezmoi init https://github.com/Tat1209/dotfiles.git
    chezmoi apply
    ```
    ※強制的に適用を行う場合は、`chezmoi apply` の代わりに `chezmoi apply --force` を実行してください。
+
+   すべてのステートを完全にリセットして適用
+   ```powershell
+   chezmoi init https://github.com/Tat1209/dotfiles.git
+   chezmoi state reset
+   chezmoi apply
+   ```
