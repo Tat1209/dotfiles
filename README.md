@@ -9,7 +9,7 @@ chezmoiによるリポジトリの初期化および管理にはGitが必要で�
 ### Windows環境
 `winget` コマンドを使用して公式パッケージをインストールします。PowerShellまたはターミナルを開き、以下を実行してください。
 ```powershell
-winget install --id Git.Git -e --source winget
+winget install Git.Git
 ```
 
 ### Linux環境
@@ -48,7 +48,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)"
 **通常の初期化と適用**
 対象リポジトリを指定して初期化し、設定を適用します。
 ```shell
-chezmoi init [https://github.com/Tat1209/dotfiles.git](https://github.com/Tat1209/dotfiles.git)
+chezmoi init https://github.com/Tat1209/dotfiles.git
 chezmoi apply
 ```
 ※強制的に適用を行う場合は、`chezmoi apply` の代わりに `chezmoi apply --force` を実行してください。
@@ -56,7 +56,7 @@ chezmoi apply
 **すべてのステートを完全にリセットして適用**
 既存の状態をクリアしてから再適用する場合は以下の順で実行します。
 ```shell
-chezmoi init [https://github.com/Tat1209/dotfiles.git](https://github.com/Tat1209/dotfiles.git)
+chezmoi init https://github.com/Tat1209/dotfiles.git
 chezmoi state reset
 chezmoi apply
 ```
