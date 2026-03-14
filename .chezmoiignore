@@ -1,13 +1,14 @@
 .vscode/
-run_onchange_setup.ps1
+# いったんインストールをあきらめる
+# setup.ps1
 
 # Windows「ではない」場合、Windows専用のファイル・ディレクトリを除外する
 {{ if ne .chezmoi.os "windows" }}
 AppData/
-run_onchange_setup.ps1
+setup.ps1
 {{ end }}
 
 # Linux「ではない」場合、Linux専用のスクリプトを除外する
 {{ if ne .chezmoi.os "linux" }}
-run_onchange_setup.sh
+setup.sh
 {{ end }}
