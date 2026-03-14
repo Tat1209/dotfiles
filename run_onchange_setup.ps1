@@ -1,7 +1,7 @@
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 $ErrorActionPreference = "Continue"
 
-$packages = @("Git.Git", "Neovim.Neovim")
+$packages = @("Neovim.Neovim")
+# $packages = @("Git.Git", "Neovim.Neovim")
 
 foreach ($pkg in $packages) {
     Write-Host "Checking and installing/updating: $pkg"
