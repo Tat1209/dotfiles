@@ -1,3 +1,4 @@
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 $ErrorActionPreference = "Continue"
 
 $packages = @("Git.Git", "Neovim.Neovim")
