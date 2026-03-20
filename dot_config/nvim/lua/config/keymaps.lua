@@ -61,8 +61,8 @@ vim.keymap.set({'v'}, 'P', '"_dP') -- ビジュアルモードで選択範囲を
 vim.keymap.set({'n'}, '@', '"_Dp') -- 行末までを上書き
 vim.keymap.set({'n'}, '`', '"_Dp') -- 行末までを上書き
 
-vim.keymap.set({'n'}, 'dx', '"_dd') -- Normal-mode: dx で行全体をレジスタに保存せず削除
-vim.keymap.set({'n'}, 'cx', '"_cc') -- Normal-mode: cx で行全体をレジスタに保存せず削除
+-- vim.keymap.set({'n'}, 'dx', '"_dd') -- Normal-mode: dx で行全体をレジスタに保存せず削除
+-- vim.keymap.set({'n'}, 'cx', '"_cc') -- Normal-mode: cx で行全体をレジスタに保存せず削除
 
 -- カーソル位置を変更
 vim.keymap.set({'n'}, 'm', '<C-o>')

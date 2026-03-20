@@ -1,34 +1,43 @@
--- lua/plugins/mini-ai.lua
 return {
-    'echasnovski/mini.ai',
-    version = '*',
-    config = function()
-        require('mini.ai').setup({
-            mappings = {
-                around_next = '', -- an の操作を無効化
-                inside_next = '', -- in の操作を無効化
-            },
-            custom_textobjects = {
-                -- n: 数値
-                -- 連続評価構文を使用します。
-                -- 第1要素(配列)で境界を含むパターンマッチのみを安全に行い、
-                -- 第2要素 '^().*()$' で抽出領域を強制的に文字列全体に設定します。
-                -- これにより、Luaパーサーのエラーと、mini.aiによる自動トリミング(eの右側のみ消えるバグ)を同時に排除します。
-                n = {
-                    {
-                        -- 1. 指数表記 (例: 6.022e23, -1e-4)
-                        -- () を外すことで、純粋な文字列マッチングとして機能させます。
-                        '%f[%d%.%-%+][%-%+]?%d+%.?%d*[eE][%-%+]?%d+%f[^%d%.eE]',
-                        '%f[%d%.%-%+][%-%+]?%.%d+[eE][%-%+]?%d+%f[^%d%.eE]',
-                        
-                        -- 2. 浮動小数点・整数 (例: 18, 0.001, -5)
-                        '%f[%deE%.%-%+][%-%+]?%d+%.?%d*%f[^%d%.eE]',
-                        '%f[%deE%.%-%+][%-%+]?%.%d+%f[^%d%.eE]',
+    {
+        'echasnovski/mini.ai',
+        version = '*',
+        -- 依存関係を明記することで、このプラグインより「先に」
+        -- nvim-treesitter のロード・インストールが実行されることを構造的に保証する
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        },
+        config = function()
+            local ai = require('mini.ai')
+            ai.setup({
+                mappings = {
+                    around_next = '', -- an の操作を無効化
+                    inside_next = '', -- in の操作を無効化
+                },
+                custom_textobjects = {
+                    -- n: 数値
+                    n = {
+                        {
+                            -- 1. 指数表記 (例: 6.022e23, -1e-4)
+                            '%f[%d%.%-%+][%-%+]?%d+%.?%d*[eE][%-%+]?%d+%f[^%d%.eE]',
+                            '%f[%d%.%-%+][%-%+]?%.%d+[eE][%-%+]?%d+%f[^%d%.eE]',
+                            
+                            -- 2. 浮動小数点・整数 (例: 18, 0.001, -5)
+                            '%f[%deE%.%-%+][%-%+]?%d+%.?%d*%f[^%d%.eE]',
+                            '%f[%deE%.%-%+][%-%+]?%.%d+%f[^%d%.eE]',
+                        },
+                        '^().*()$',
                     },
-                    -- 上記でマッチした文字列全体を a と i の両方に強制適用します。
-                    '^().*()$',
+                    
+                    -- a: カンマ区切りの要素（引数、リスト要素）
+                    a = ai.gen_spec.argument({ separator = ',' }),
+                    -- f: 関数定義 (Treesitter)
+                    f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+                    -- c: クラス定義 (Treesitter)
+                    c = ai.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
                 }
-            }
-        })
-    end,
+            })
+        end,
+    }
 }
