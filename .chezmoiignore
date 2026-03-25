@@ -1,6 +1,4 @@
 .vscode/
-# いったんインストールをあきらめる
-# setup.ps1
 
 # Windows「ではない」場合、Windows専用のファイル・ディレクトリを除外する
 {{ if ne .chezmoi.os "windows" }}
