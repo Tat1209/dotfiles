@@ -97,6 +97,6 @@ end
 -- 行統合
 vim.keymap.set({'n'}, '<C-j>', 'J')
 -- vim.keymap.set({'n'}, '<C-J>', 'gJ') -- これ追加すると J の挙動がバグる S-j とかにしたら治る？
-vim.keymap.set({'n'}, '<C-S-j>', 'gJ'
+vim.keymap.set({'n'}, '<C-S-j>', 'gJ')
 vim.keymap.set({'n'}, '<C-k>', 'k"xdd"xpkJ')
 vim.keymap.set({'n'}, '<C-S-k>', 'k"xdd"xpkgJ')
