@@ -29,11 +29,13 @@ vim.keymap.set({'n'}, '>', '>>')
 vim.keymap.set({'n'}, '<', '<<')
 
 -- まとめてインデント
-if not vim.g.vscode then
-    vim.keymap.set({'v'}, '>', '>gv')
-    vim.keymap.set({'v'}, '<', '<gv')
-    -- VSCodeのはVSCode側で制御
-end
+vim.keymap.set({'v'}, '>', '>gv')
+vim.keymap.set({'v'}, '<', '<gv')
+-- if not vim.g.vscode then
+--     vim.keymap.set({'v'}, '>', '>gv')
+--     vim.keymap.set({'v'}, '<', '<gv')
+--     -- VSCodeのはVSCode側で制御 同期ずれ回避のため？
+-- end
 
 -- 処理時にカーソルが移動しないように
 vim.keymap.set({'n'}, '*', 'mx*`x')
