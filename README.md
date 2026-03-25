@@ -20,7 +20,7 @@ winget install twpayne.chezmoi --silent
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 # 4. chezmoi の初期化と適用
-chezmoi init [https://github.com/Tat1209/dotfiles.git](https://github.com/Tat1209/dotfiles.git)
+chezmoi init https://github.com/Tat1209/dotfiles.git
 chezmoi apply
 ```
 ※ 実行後にコマンドが認識されない場合は、PowerShellを一度再起動してください。
@@ -44,7 +44,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 # 4. chezmoi の初期化と適用
-chezmoi init [https://github.com/Tat1209/dotfiles.git](https://github.com/Tat1209/dotfiles.git)
+chezmoi init https://github.com/Tat1209/dotfiles.git
 chezmoi apply
 ```
 
@@ -61,7 +61,7 @@ chezmoi apply --force
 
 **ステートの完全リセットと再適用**
 ```shell
-chezmoi init [https://github.com/Tat1209/dotfiles.git](https://github.com/Tat1209/dotfiles.git)
+chezmoi init https://github.com/Tat1209/dotfiles.git
 chezmoi state reset
 chezmoi apply
 ```
